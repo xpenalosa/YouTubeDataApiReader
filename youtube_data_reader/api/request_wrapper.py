@@ -222,13 +222,13 @@ class RequestWrapper:
     def get_comment_threads_by_channel(key: str, parts: List[str], channel_id: str = None, max_results: int = 20,
                                        order: str = "time", page_token: str = None, search_terms: str = None,
                                        text_format: str = "html") -> requests.Response:
-        """ Query the comment threads endpoint.
+        """ Query the comment threads endpoint for threads that contain messages posted by a certain channel.
 
         See https://developers.google.com/youtube/v3/docs/commentThreads/list for complete documentation.
 
         :param key: Required API key.
         :param parts: CommentThread resource properties that the API response will include.
-        :param channel_id:
+        :param channel_id: The ID of the channel to retrieve comment threads from.
         :param max_results: Maximum items that should be returned in the result set. Values between 1 to 100, inclusive.
         :param order: Whether the threads should be sorted by "time" or "relevance".
         :param page_token: Identifies a specific page in the result set that should be returned.
@@ -255,13 +255,13 @@ class RequestWrapper:
                                                max_results: int = 20, order: str = "time", page_token: str = None,
                                                search_terms: str = None,
                                                text_format: str = "html") -> requests.Response:
-        """ Query the comment threads endpoint.
+        """ Query the comment threads endpoint for threads that contain messages posted by or in a certain channel.
 
         See https://developers.google.com/youtube/v3/docs/commentThreads/list for complete documentation.
 
         :param key: Required API key.
         :param parts: CommentThread resource properties that the API response will include.
-        :param channel_id:
+        :param channel_id: The ID of the channel to retrieve comment threads from.
         :param max_results: Maximum items that should be returned in the result set. Values between 1 to 100, inclusive.
         :param order: Whether the threads should be sorted by "time" or "relevance".
         :param page_token: Identifies a specific page in the result set that should be returned.
