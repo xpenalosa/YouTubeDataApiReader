@@ -167,7 +167,7 @@ class RequestWrapper:
         :param max_results: Maximum items that should be returned in the result set. Values between 1 to 100, inclusive.
         :param order: Whether the threads should be sorted by "time" or "relevance".
         :param page_token: Identifies a specific page in the result set that should be returned.
-        :param search_terms:
+        :param search_terms: Limit the API response to only contain comments that contain the specified search terms.
         :param text_format: Indicates whether the API should return comments formatted as "html" or as "plainText".
         :return: Response object associated with the request. See documentation for details.
         """
@@ -200,7 +200,7 @@ class RequestWrapper:
         :param max_results: Maximum items that should be returned in the result set. Values between 1 to 100, inclusive.
         :param order: Whether the threads should be sorted by "time" or "relevance".
         :param page_token: Identifies a specific page in the result set that should be returned.
-        :param search_terms:
+        :param search_terms: Limit the API response to only contain comments that contain the specified search terms.
         :param text_format: Indicates whether the API should return comments formatted as "html" or as "plainText".
         :return: Response object associated with the request. See documentation for details.
         """
@@ -232,7 +232,7 @@ class RequestWrapper:
         :param max_results: Maximum items that should be returned in the result set. Values between 1 to 100, inclusive.
         :param order: Whether the threads should be sorted by "time" or "relevance".
         :param page_token: Identifies a specific page in the result set that should be returned.
-        :param search_terms:
+        :param search_terms: Limit the API response to only contain comments that contain the specified search terms.
         :param text_format: Indicates whether the API should return comments formatted as "html" or as "plainText".
         :return: Response object associated with the request. See documentation for details.
         """
@@ -265,7 +265,7 @@ class RequestWrapper:
         :param max_results: Maximum items that should be returned in the result set. Values between 1 to 100, inclusive.
         :param order: Whether the threads should be sorted by "time" or "relevance".
         :param page_token: Identifies a specific page in the result set that should be returned.
-        :param search_terms:
+        :param search_terms: Limit the API response to only contain comments that contain the specified search terms.
         :param text_format: Indicates whether the API should return comments formatted as "html" or as "plainText".
         :return: Response object associated with the request. See documentation for details.
         """
