@@ -1,4 +1,4 @@
-from typing import Callable, Union, Any
+from typing import Callable, Any
 from functools import wraps
 import requests
 
@@ -6,7 +6,7 @@ import requests
 class RequestErrorHandler:
 
     @staticmethod
-    def handle_http_errors(func: Callable[[Union[Any]], requests.Response]) -> Callable[[Union[Any]], dict]:
+    def handle_http_errors(func: Callable[[Any], requests.Response]) -> Callable[[[Any]], dict]:
         def is_error(code: int) -> bool:
             return code in [400, 401, 403, 404]
 
