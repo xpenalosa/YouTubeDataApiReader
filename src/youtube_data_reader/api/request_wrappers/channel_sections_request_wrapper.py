@@ -12,7 +12,7 @@ class ChannelSectionsRequestWrapper:
     @RequestErrorHandler.handle_http_errors
     def get_channel_sections(key: str, parts: List[str], channel_id: str,
                              localization_code: str = None) -> requests.Response:
-        """ Query the channel sections endpoint.
+        """ Query the channel sections endpoint for a specific channel.
 
         See https://developers.google.com/youtube/v3/docs/channelSections/list for complete documentation.
 

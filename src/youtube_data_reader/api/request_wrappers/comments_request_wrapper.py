@@ -49,7 +49,7 @@ class CommentsRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "parentId": comment_id,
-            "maxResults": max_results,
+            "maxResults": max(1, min(100, max_results)),
             "textFormat": text_format}
         if page_token:
             param_dict["pageToken"] = page_token
@@ -63,7 +63,6 @@ class CommentsRequestWrapper:
         """ Query the comment threads endpoint.
 
         See https://developers.google.com/youtube/v3/docs/commentThreads/list for complete documentation.
-
 
         :param key: Required API key.
         :param parts: CommentThread resource properties that the API response will include.
@@ -79,7 +78,7 @@ class CommentsRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "id": ",".join(thread_ids),
-            "maxResults": max_results,
+            "maxResults": max(1, min(100, max_results)),
             "textFormat": text_format,
             "order": order}
         if page_token:
@@ -93,10 +92,9 @@ class CommentsRequestWrapper:
     def get_comment_threads_in_video(key: str, parts: List[str], video_id: str, max_results: int = 20,
                                      order: str = "time", page_token: str = None, search_terms: str = None,
                                      text_format: str = "html") -> requests.Response:
-        """ Query the comment threads endpoint.
+        """ Query the comment threads endpoint for comment threads in a specific video.
 
         See https://developers.google.com/youtube/v3/docs/commentThreads/list for complete documentation.
-
 
         :param key: Required API key.
         :param parts: CommentThread resource properties that the API response will include.
@@ -112,7 +110,7 @@ class CommentsRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "videoId": video_id,
-            "maxResults": max_results,
+            "maxResults": max(1, min(100, max_results)),
             "textFormat": text_format,
             "order": order}
         if page_token:
@@ -144,7 +142,7 @@ class CommentsRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "channelId": channel_id,
-            "maxResults": max_results,
+            "maxResults": max(1, min(100, max_results)),
             "textFormat": text_format,
             "order": order}
         if page_token:
@@ -177,7 +175,7 @@ class CommentsRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "allThreadsRelatedToChannelId": channel_id,
-            "maxResults": max_results,
+            "maxResults": max(1, min(100, max_results)),
             "textFormat": text_format,
             "order": order}
         if page_token:

@@ -12,7 +12,7 @@ class PlaylistRequestWrapper:
     @RequestErrorHandler.handle_http_errors
     def get_playlist_items(key: str, parts: List[str], playlist_id: str, max_results: int = 5,
                            page_token: str = None, video_id: str = None):
-        """ Query the playlist items endpoint.
+        """ Query the playlist items endpoint for items in a specific playlist.
 
         See https://developers.google.com/youtube/v3/docs/playlistItems/list for complete documentation.
 
@@ -28,7 +28,7 @@ class PlaylistRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "playlistId": ",".join(playlist_id),
-            "maxResults": max_results}
+            "maxResults": max(0, min(50, max_results))}
         if page_token:
             param_dict["pageToken"] = page_token
         if video_id:
@@ -55,7 +55,7 @@ class PlaylistRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "id": ",".join(playlist_item_ids),
-            "maxResults": max_results}
+            "maxResults": max(0, min(50, max_results))}
         if page_token:
             param_dict["pageToken"] = page_token
         if video_id:
@@ -66,7 +66,7 @@ class PlaylistRequestWrapper:
     @RequestErrorHandler.handle_http_errors
     def get_channel_playlists(key: str, parts: List[str], channel_id: str, max_results: int = 5, page_token: str = None,
                               localization_code: str = None) -> requests.Response:
-        """ Query the playlists endpoint.
+        """ Query the playlists endpoint for playlists in a specific channel.
 
         See https://developers.google.com/youtube/v3/docs/playlists/list for complete documentation.
 
@@ -82,7 +82,7 @@ class PlaylistRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "channelId": channel_id,
-            "maxResults": max_results}
+            "maxResults": max(0, min(50, max_results))}
         if page_token:
             param_dict["pageToken"] = page_token
         if localization_code:
@@ -109,7 +109,7 @@ class PlaylistRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "id": ",".join(playlist_ids),
-            "maxResults": max_results}
+            "maxResults": max(0, min(50, max_results))}
         if page_token:
             param_dict["pageToken"] = page_token
         if localization_code:

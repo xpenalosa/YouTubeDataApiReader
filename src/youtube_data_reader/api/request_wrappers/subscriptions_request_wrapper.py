@@ -13,7 +13,7 @@ class SubscriptionsRequestWrapper:
     def get_channel_subscriptions(key: str, parts: List[str], channel_id: str, to_channel_ids: List[str] = None,
                                   max_results: int = 5, order: str = "relevance",
                                   page_token: str = None) -> requests.Response:
-        """ Query the subscriptions endpoint.
+        """ Query the subscriptions endpoint for subscriptions from a certain channel.
 
         See https://developers.google.com/youtube/v3/docs/subscriptions/list for complete documentation.
 
@@ -30,7 +30,7 @@ class SubscriptionsRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "channelId": channel_id,
-            "maxResults": max_results,
+            "maxResults": max(0, min(50, max_results)),
             "order": order}
         if to_channel_ids:
             param_dict["forChannelIds"] = ",".join(to_channel_ids)
@@ -59,7 +59,7 @@ class SubscriptionsRequestWrapper:
             "key": key,
             "part": ",".join(parts),
             "id": ",".join(subscription_ids),
-            "maxResults": max_results,
+            "maxResults": max(0, min(50, max_results)),
             "order": order}
         if to_channel_ids:
             param_dict["forChannelIds"] = ",".join(to_channel_ids)
