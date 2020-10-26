@@ -3,7 +3,7 @@ from urllib.parse import quote
 
 
 class RequestHandler:
-    url = "https://www.googleapis.com/youtube/v3/"
+    domain = "https://www.googleapis.com/youtube/v3/"
 
     @staticmethod
     def _escape_parameters(parameters: dict) -> dict:
@@ -14,7 +14,12 @@ class RequestHandler:
         return "&".join([f"{k}={v}" for k, v in parameters.items()])
 
     @staticmethod
-    def request(endpoint, parameters: dict) -> requests.Response:
+    def _build_url(domain: str, endpoint: str, parameters: dict) -> str:
         escaped_params = RequestHandler._escape_parameters(parameters)
         formatted_params = RequestHandler._form_parameter_string(escaped_params)
-        return requests.get(f"{RequestHandler.url}/{endpoint}?{formatted_params}")
+        return f"{domain}/{endpoint}?{formatted_params}"
+
+    @staticmethod
+    def request(endpoint, parameters: dict) -> requests.Response:
+        url = RequestHandler._build_url(RequestHandler.domain, endpoint, parameters)
+        return requests.get(url)
