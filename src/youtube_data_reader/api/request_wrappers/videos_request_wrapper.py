@@ -1,17 +1,13 @@
 from typing import List
 
-import requests
-
-from youtube_data_reader.api.request_error_handler import RequestErrorHandler
 from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class VideosRequestWrapper:
 
     @staticmethod
-    @RequestErrorHandler.handle_http_errors
     def get_videos(key: str, parts: List[str], video_ids: List[str], localization_code: str = None,
-                   max_height: int = None, max_width: int = None) -> requests.Response:
+                   max_height: int = None, max_width: int = None) -> dict:
         """ Query the videos endpoint.
 
         See https://developers.google.com/youtube/v3/docs/channelSections/list for complete documentation.
@@ -22,7 +18,7 @@ class VideosRequestWrapper:
         :param localization_code: BCP-47 code that uniquely identifies a language for localization.
         :param max_width: Maximum width of the embedded player returned in the player.embedHtml property. 72 to 8192.
         :param max_height: Maximum height of the embedded player returned in the player.embedHtml property. 72 to 8192.
-        :return: Response object associated with the request. See documentation for details.
+        :return: JSON object associated with the query endpoint. See documentation for details.
         """
         param_dict = {
             "key": key,
@@ -36,13 +32,12 @@ class VideosRequestWrapper:
         if max_width:
             # Value 0 is invalid so truthy value check is enough
             param_dict["maxWidth"] = max(72, min(8192, max_width))
-        return RequestHandler.request("channels", param_dict)
+        return RequestHandler.query_endpoint("channels", param_dict)
 
     @staticmethod
-    @RequestErrorHandler.handle_http_errors
     def get_popular_videos(key: str, parts: List[str], localization_code: str = None, max_results: int = 5,
                            max_height: int = None, max_width: int = None, page_token: str = None,
-                           region_code: str = None, category_id: str = "0") -> requests.Response:
+                           region_code: str = None, category_id: str = "0") -> dict:
         """ Query the videos endpoint for the most popular videos in a category and/or region.
 
         See https://developers.google.com/youtube/v3/docs/channelSections/list for complete documentation.
@@ -56,7 +51,7 @@ class VideosRequestWrapper:
         :param page_token: Identifies a specific page in the result set that should be returned.
         :param category_id: Video category for which the popular videos should be retrieved.
         :param region_code: ISO 3166-1 alpha-2 code for the country to retrieve popular videos from.
-        :return: Response object associated with the request. See documentation for details.
+        :return: JSON object associated with the query endpoint. See documentation for details.
         """
         param_dict = {
             "key": key,
@@ -77,4 +72,4 @@ class VideosRequestWrapper:
         if region_code:
             param_dict["regionCode"] = region_code
 
-        return RequestHandler.request("channels", param_dict)
+        return RequestHandler.query_endpoint("channels", param_dict)

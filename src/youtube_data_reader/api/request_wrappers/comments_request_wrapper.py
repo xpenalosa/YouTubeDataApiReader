@@ -1,17 +1,12 @@
 from typing import List
 
-import requests
-
-from youtube_data_reader.api.request_error_handler import RequestErrorHandler
 from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class CommentsRequestWrapper:
 
     @staticmethod
-    @RequestErrorHandler.handle_http_errors
-    def get_comments(key: str, parts: List[str], comment_ids: List[str],
-                     text_format: str = "html") -> requests.Response:
+    def get_comments(key: str, parts: List[str], comment_ids: List[str], text_format: str = "html") -> dict:
         """ Query the comments endpoint.
 
         See https://developers.google.com/youtube/v3/docs/comments/list for complete documentation.
@@ -20,19 +15,18 @@ class CommentsRequestWrapper:
         :param parts: Comment resource properties that the API response will include.
         :param comment_ids: Comment IDs for the resources that are being retrieved.
         :param text_format: Indicates whether the API should return comments formatted as "html" or as "plainText".
-        :return: Response object associated with the request. See documentation for details.
+        :return: Response object associated with the query_endpoint. See documentation for details.
         """
         param_dict = {
             "key": key,
             "part": ",".join(parts),
             "id": ",".join(comment_ids),
             "textFormat": text_format}
-        return RequestHandler.request("channels", param_dict)
+        return RequestHandler.query_endpoint("channels", param_dict)
 
     @staticmethod
-    @RequestErrorHandler.handle_http_errors
     def get_comment_responses(key: str, parts: List[str], comment_id: str, max_results: int = 20,
-                              page_token: str = None, text_format: str = "html") -> requests.Response:
+                              page_token: str = None, text_format: str = "html") -> dict:
         """ Query the comments endpoint for the responses to a comment.
 
         See https://developers.google.com/youtube/v3/docs/comments/list for complete documentation.
@@ -43,7 +37,7 @@ class CommentsRequestWrapper:
         :param max_results: Maximum items that should be returned in the result set. Values between 1 to 100, inclusive.
         :param page_token: Identifies a specific page in the result set that should be returned.
         :param text_format: Indicates whether the API should return comments formatted as "html" or as "plainText".
-        :return: Response object associated with the request. See documentation for details.
+        :return: JSON object associated with the query endpoint. See documentation for details.
         """
         param_dict = {
             "key": key,
@@ -53,13 +47,12 @@ class CommentsRequestWrapper:
             "textFormat": text_format}
         if page_token:
             param_dict["pageToken"] = page_token
-        return RequestHandler.request("channels", param_dict)
+        return RequestHandler.query_endpoint("channels", param_dict)
 
     @staticmethod
-    @RequestErrorHandler.handle_http_errors
     def get_comment_threads(key: str, parts: List[str], thread_ids: List[str], max_results: int = 20,
                             order: str = "time", page_token: str = None, search_terms: str = None,
-                            text_format: str = "html") -> requests.Response:
+                            text_format: str = "html") -> dict:
         """ Query the comment threads endpoint.
 
         See https://developers.google.com/youtube/v3/docs/commentThreads/list for complete documentation.
@@ -72,7 +65,7 @@ class CommentsRequestWrapper:
         :param page_token: Identifies a specific page in the result set that should be returned.
         :param search_terms: Limit the API response to only contain comments that contain the specified search terms.
         :param text_format: Indicates whether the API should return comments formatted as "html" or as "plainText".
-        :return: Response object associated with the request. See documentation for details.
+        :return: JSON object associated with the query endpoint. See documentation for details.
         """
         param_dict = {
             "key": key,
@@ -85,13 +78,12 @@ class CommentsRequestWrapper:
             param_dict["pageToken"] = page_token
         if search_terms:
             param_dict["searchTerms"] = search_terms
-        return RequestHandler.request("channels", param_dict)
+        return RequestHandler.query_endpoint("channels", param_dict)
 
     @staticmethod
-    @RequestErrorHandler.handle_http_errors
     def get_comment_threads_in_video(key: str, parts: List[str], video_id: str, max_results: int = 20,
                                      order: str = "time", page_token: str = None, search_terms: str = None,
-                                     text_format: str = "html") -> requests.Response:
+                                     text_format: str = "html") -> dict:
         """ Query the comment threads endpoint for comment threads in a specific video.
 
         See https://developers.google.com/youtube/v3/docs/commentThreads/list for complete documentation.
@@ -104,7 +96,7 @@ class CommentsRequestWrapper:
         :param page_token: Identifies a specific page in the result set that should be returned.
         :param search_terms: Limit the API response to only contain comments that contain the specified search terms.
         :param text_format: Indicates whether the API should return comments formatted as "html" or as "plainText".
-        :return: Response object associated with the request. See documentation for details.
+        :return: JSON object associated with the query endpoint. See documentation for details.
         """
         param_dict = {
             "key": key,
@@ -117,13 +109,12 @@ class CommentsRequestWrapper:
             param_dict["pageToken"] = page_token
         if search_terms:
             param_dict["searchTerms"] = search_terms
-        return RequestHandler.request("channels", param_dict)
+        return RequestHandler.query_endpoint("channels", param_dict)
 
     @staticmethod
-    @RequestErrorHandler.handle_http_errors
     def get_comment_threads_by_channel(key: str, parts: List[str], channel_id: str = None, max_results: int = 20,
                                        order: str = "time", page_token: str = None, search_terms: str = None,
-                                       text_format: str = "html") -> requests.Response:
+                                       text_format: str = "html") -> dict:
         """ Query the comment threads endpoint for threads that contain messages posted by a certain channel.
 
         See https://developers.google.com/youtube/v3/docs/commentThreads/list for complete documentation.
@@ -136,7 +127,7 @@ class CommentsRequestWrapper:
         :param page_token: Identifies a specific page in the result set that should be returned.
         :param search_terms: Limit the API response to only contain comments that contain the specified search terms.
         :param text_format: Indicates whether the API should return comments formatted as "html" or as "plainText".
-        :return: Response object associated with the request. See documentation for details.
+        :return: JSON object associated with the query endpoint. See documentation for details.
         """
         param_dict = {
             "key": key,
@@ -149,14 +140,12 @@ class CommentsRequestWrapper:
             param_dict["pageToken"] = page_token
         if search_terms:
             param_dict["searchTerms"] = search_terms
-        return RequestHandler.request("channels", param_dict)
+        return RequestHandler.query_endpoint("channels", param_dict)
 
     @staticmethod
-    @RequestErrorHandler.handle_http_errors
     def get_comment_threads_related_to_channel(key: str, parts: List[str], channel_id: str = None,
                                                max_results: int = 20, order: str = "time", page_token: str = None,
-                                               search_terms: str = None,
-                                               text_format: str = "html") -> requests.Response:
+                                               search_terms: str = None, text_format: str = "html") -> dict:
         """ Query the comment threads endpoint for threads that contain messages posted by or in a certain channel.
 
         See https://developers.google.com/youtube/v3/docs/commentThreads/list for complete documentation.
@@ -169,7 +158,7 @@ class CommentsRequestWrapper:
         :param page_token: Identifies a specific page in the result set that should be returned.
         :param search_terms: Limit the API response to only contain comments that contain the specified search terms.
         :param text_format: Indicates whether the API should return comments formatted as "html" or as "plainText".
-        :return: Response object associated with the request. See documentation for details.
+        :return: JSON object associated with the query endpoint. See documentation for details.
         """
         param_dict = {
             "key": key,
@@ -182,4 +171,4 @@ class CommentsRequestWrapper:
             param_dict["pageToken"] = page_token
         if search_terms:
             param_dict["searchTerms"] = search_terms
-        return RequestHandler.request("channels", param_dict)
+        return RequestHandler.query_endpoint("channels", param_dict)

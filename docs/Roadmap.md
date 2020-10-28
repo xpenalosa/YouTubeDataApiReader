@@ -3,8 +3,8 @@
 
 - [x] Build API interaction system
     - [x] Implementation
-    - [ ] API Error handling
-    - [x] Test coverage
+    - [x] API Error handling
+    - [ ] Test coverage
 - [ ] Map read-only endpoints to methods
     - [x] Implementation
     - [ ] Test coverage

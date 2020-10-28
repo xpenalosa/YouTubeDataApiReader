@@ -1,18 +1,13 @@
 from typing import List
 
-import requests
-
-from youtube_data_reader.api.request_error_handler import RequestErrorHandler
 from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class SubscriptionsRequestWrapper:
 
     @staticmethod
-    @RequestErrorHandler.handle_http_errors
     def get_channel_subscriptions(key: str, parts: List[str], channel_id: str, to_channel_ids: List[str] = None,
-                                  max_results: int = 5, order: str = "relevance",
-                                  page_token: str = None) -> requests.Response:
+                                  max_results: int = 5, order: str = "relevance", page_token: str = None) -> dict:
         """ Query the subscriptions endpoint for subscriptions from a certain channel.
 
         See https://developers.google.com/youtube/v3/docs/subscriptions/list for complete documentation.
@@ -24,7 +19,7 @@ class SubscriptionsRequestWrapper:
         :param max_results: Maximum items that should be returned in the result set. Values between 0 to 50, inclusive.
         :param order: Whether the subscriptions should be sorted by "alphabetical", "relevance", or "unread".
         :param page_token: Identifies a specific page in the result set that should be returned.
-        :return: Response object associated with the request. See documentation for details.
+        :return: JSON object associated with the query endpoint. See documentation for details.
         """
         param_dict = {
             "key": key,
@@ -36,12 +31,11 @@ class SubscriptionsRequestWrapper:
             param_dict["forChannelIds"] = ",".join(to_channel_ids)
         if page_token:
             param_dict["pageToken"] = page_token
-        return RequestHandler.request("subscriptions", param_dict)
+        return RequestHandler.query_endpoint("subscriptions", param_dict)
 
     @staticmethod
-    @RequestErrorHandler.handle_http_errors
     def get_subscriptions(key: str, parts: List[str], subscription_ids: List[str], to_channel_ids: List[str] = None,
-                          max_results: int = 5, order: str = "relevance", page_token: str = None) -> requests.Response:
+                          max_results: int = 5, order: str = "relevance", page_token: str = None) -> dict:
         """ Query the subscriptions endpoint.
 
         See https://developers.google.com/youtube/v3/docs/subscriptions/list for complete documentation.
@@ -53,7 +47,7 @@ class SubscriptionsRequestWrapper:
         :param max_results: Maximum items that should be returned in the result set. Values between 0 to 50, inclusive.
         :param order: Whether the subscriptions should be sorted by "alphabetical", "relevance", or "unread".
         :param page_token: Identifies a specific page in the result set that should be returned.
-        :return: Response object associated with the request. See documentation for details.
+        :return: JSON object associated with the query endpoint. See documentation for details.
         """
         param_dict = {
             "key": key,
@@ -65,4 +59,4 @@ class SubscriptionsRequestWrapper:
             param_dict["forChannelIds"] = ",".join(to_channel_ids)
         if page_token:
             param_dict["pageToken"] = page_token
-        return RequestHandler.request("subscriptions", param_dict)
+        return RequestHandler.query_endpoint("subscriptions", param_dict)

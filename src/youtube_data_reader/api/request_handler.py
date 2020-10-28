@@ -1,25 +1,24 @@
 import requests
-from urllib.parse import quote
+from urllib.parse import urljoin
+import json
 
 
 class RequestHandler:
     domain = "https://www.googleapis.com/youtube/v3/"
 
     @staticmethod
-    def _escape_parameters(parameters: dict) -> dict:
-        return dict([(quote(k), quote(v)) for k, v in parameters.items()])
+    def extract_error(response_body: dict) -> str:
+        # Remove method and inline call?
+        return json.dumps(response_body["error"]["errors"])
 
     @staticmethod
-    def _form_parameter_string(parameters: dict) -> str:
-        return "&".join([f"{k}={v}" for k, v in parameters.items()])
-
-    @staticmethod
-    def _build_url(domain: str, endpoint: str, parameters: dict) -> str:
-        escaped_params = RequestHandler._escape_parameters(parameters)
-        formatted_params = RequestHandler._form_parameter_string(escaped_params)
-        return f"{domain}/{endpoint}?{formatted_params}"
-
-    @staticmethod
-    def request(endpoint, parameters: dict) -> requests.Response:
-        url = RequestHandler._build_url(RequestHandler.domain, endpoint, parameters)
-        return requests.get(url)
+    def query_endpoint(endpoint, parameters: dict) -> dict:
+        response = requests.get(
+            urljoin(RequestHandler.domain, endpoint),
+            params=parameters,
+        )
+        body = response.json()  # type: dict
+        if not response.ok:
+            error_message = RequestHandler.extract_error(body)
+            raise requests.exceptions.HTTPError(error_message)
+        return body
