@@ -20,4 +20,4 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint src/youtube_data_reader --max_line_length=120
+        pylint src/youtube_data_reader --max-line-length=120
