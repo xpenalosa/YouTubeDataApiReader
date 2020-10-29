@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from dataclasses_json import dataclass_json
+from dataclasses_json import dataclass_json, LetterCase
 
 
 @dataclass_json
@@ -10,7 +10,7 @@ class RelatedPlaylists:
     uploads: str
 
 
-@dataclass_json
+@dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class ChannelContentDetails:
-    relatedPlaylists: RelatedPlaylists
+    related_playlists: RelatedPlaylists

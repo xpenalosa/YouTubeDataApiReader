@@ -1,10 +1,11 @@
-import requests
-from urllib.parse import urljoin
 import json
+from urllib.parse import urljoin
+
+import requests
 
 
 class RequestHandler:
-    domain = "https://www.googleapis.com/youtube/v3/"
+    DOMAIN = "https://www.googleapis.com/youtube/v3/"
 
     @staticmethod
     def extract_error(response_body: dict) -> str:
@@ -14,7 +15,7 @@ class RequestHandler:
     @staticmethod
     def query_endpoint(endpoint, parameters: dict) -> dict:
         response = requests.get(
-            urljoin(RequestHandler.domain, endpoint),
+            urljoin(RequestHandler.DOMAIN, endpoint),
             params=parameters,
         )
         body = response.json()  # type: dict

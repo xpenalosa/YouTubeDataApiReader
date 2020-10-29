@@ -1,21 +1,21 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import dataclass_json, LetterCase, config
 
 
-@dataclass_json
+@dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class CaptionSnippet:
-    audioTrackType: str
-    failureReason: str
-    isAutoSynced: bool
-    isCC: bool
-    isDraft: bool
-    isEasyReader: bool
-    isLarge: bool
+    audio_track_type: str
+    failure_reason: str
+    is_auto_synced: bool
+    is_cc: bool = field(metadata=config(field_name="isCC"))
+    is_draft: bool
+    is_easy_reader: bool
+    is_large: bool
     language: str
-    lastUpdated: str  # FIXME: datetime
+    last_updated: str  # FIXME: datetime
     name: str
     status: str
-    trackKind: str
-    videoId: str
+    track_kind: str
+    video_id: str

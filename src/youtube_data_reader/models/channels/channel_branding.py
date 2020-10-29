@@ -1,34 +1,34 @@
 from dataclasses import dataclass
 from typing import List
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import dataclass_json, LetterCase
 
 
-@dataclass_json
+@dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class BrandingChannel:
     country: str
-    defaultLanguage: str
-    defaultTab: str
+    default_language: str
+    default_tab: str
     description: str
-    featuredChannelsTitle: str
-    featuredChannelsUrls: List[str]
+    featured_channels_title: str
+    featured_channels_urls: List[str]
     keywords: str
-    moderateComments: bool
-    profileColor: str
-    showBrowseView: bool
-    showRelatedChannels: bool
+    moderate_comments: bool
+    profile_color: str
+    show_browse_view: bool
+    show_related_channels: bool
     title: str
-    trackingAnalyticsAccountId: str
-    unsubscribedTrailer: str
+    tracking_analytics_account_id: str
+    unsubscribed_trailer: str
 
 
-@dataclass_json
+@dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class BrandingWatch:
-    backgroundColor: str
-    featuredPlaylistId: str
-    textColor: str
+    background_color: str
+    featured_playlist_id: str
+    text_color: str
 
 
 @dataclass_json

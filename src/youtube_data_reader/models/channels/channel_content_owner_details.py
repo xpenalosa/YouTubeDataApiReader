@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import dataclass_json, LetterCase
 
 
-@dataclass_json
+@dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class ChannelContentOwnerDetails:
-    contentOwner: str
-    timeLinked: str  # FIXME: datetime
+    content_owner: str
+    time_linked: str  # FIXME: datetime

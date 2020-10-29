@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import dataclass_json, LetterCase
 
 
-@dataclass_json
+@dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class ChannelStatus:
-    privacyStatus: str
-    isLinked: bool
-    longUploadsStatus: str
-    madeForKids: bool
-    selfDeclaredMadeForKids: bool
+    is_linked: bool
+    long_uploads_status: str
+    made_for_kids: bool
+    privacy_status: str
+    self_declared_made_for_kids: bool
