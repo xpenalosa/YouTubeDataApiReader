@@ -1,18 +1,12 @@
-from dataclasses import dataclass
-
 from dataclasses_json import dataclass_json, LetterCase
 
+from youtube_data_reader.models.comments.comment_author_channel_id import CommentAuthorChannelId
 from youtube_data_reader.models.common.published_item_snippet import PublishedItemSnippet
-
-
-@dataclass_json
-@dataclass
-class CommentAuthorChannelId:
-    value: str
+from youtube_data_reader.models.utils import defaulted_dataclass
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
+@defaulted_dataclass
 class CommentSnippet(PublishedItemSnippet):
     author_channel_id: CommentAuthorChannelId
     author_channel_url: str

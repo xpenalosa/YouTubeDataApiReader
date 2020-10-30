@@ -1,19 +1,18 @@
-from dataclasses import dataclass
-
 from dataclasses_json import dataclass_json, LetterCase
 
 from youtube_data_reader.models.common.published_item_snippet import PublishedItemSnippet
+from youtube_data_reader.models.utils import defaulted_dataclass
 
 
 @dataclass_json
-@dataclass
+@defaulted_dataclass
 class LocalizedChannelInfo:
     description: str
     title: str
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
+@defaulted_dataclass
 class ChannelSnippet(PublishedItemSnippet):
     country: str
     custom_url: str

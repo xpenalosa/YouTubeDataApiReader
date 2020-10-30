@@ -1,10 +1,12 @@
-from dataclasses import dataclass, field
+from dataclasses import field
 
 from dataclasses_json import dataclass_json, LetterCase, config
 
+from youtube_data_reader.models.utils import defaulted_dataclass
+
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
+@defaulted_dataclass
 class CaptionSnippet:
     audio_track_type: str
     failure_reason: str
