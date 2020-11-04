@@ -10,6 +10,7 @@ from youtube_data_reader.models.videos.video_file_details import VideoFileDetail
 from youtube_data_reader.models.videos.video_live_streaming_details import VideoLiveStreamingDetails
 from youtube_data_reader.models.videos.video_player import VideoPlayer
 from youtube_data_reader.models.videos.video_processing_details import VideoProcessingDetails
+from youtube_data_reader.models.videos.video_recording_details import VideoRecordingDetails
 from youtube_data_reader.models.videos.video_snippet import VideoSnippet
 from youtube_data_reader.models.videos.video_statistics import VideoStatistics
 from youtube_data_reader.models.videos.video_status import VideoStatus
@@ -26,7 +27,7 @@ class Video(_IdentifiedModelBase):
     localizations: Dict[str, LocalizationEntry]
     player: VideoPlayer
     processing_details: VideoProcessingDetails
-    recording_details: Dict[str, str]  # FIXME: datetime
+    recording_details: VideoRecordingDetails
     snippet: VideoSnippet
     statistics: VideoStatistics
     status: VideoStatus

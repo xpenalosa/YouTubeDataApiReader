@@ -1,8 +1,10 @@
+from datetime import datetime
+
 from dataclasses_json import dataclass_json, LetterCase
 
 from youtube_data_reader.models.comments.comment_author_channel_id import CommentAuthorChannelId
 from youtube_data_reader.models.common.published_item_snippet import PublishedItemSnippet
-from youtube_data_reader.models.utils import defaulted_dataclass
+from youtube_data_reader.models.utils import defaulted_dataclass, iso8601_datetime_field
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -19,6 +21,6 @@ class CommentSnippet(PublishedItemSnippet):
     parent_id: str
     text_display: str
     text_original: str
-    updated_at: str  # FIXME: datetime
+    updated_at: datetime = iso8601_datetime_field
     video_id: str
     viewer_rating: str

@@ -1,5 +1,14 @@
-from dataclasses import dataclass, field as dc_field
+"""Utility functions that are used throughout the models module.
+
+The functions in this module are required in order to implement missing or limiting functionalities related to the
+dataclasses_json module.
+"""
+
+from dataclasses import dataclass, field as dc_field, field
+from datetime import datetime
 from typing import Union
+
+from dataclasses_json import config
 
 
 def defaulted_dataclass(_cls=None, *, init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False):
@@ -35,3 +44,27 @@ def defaulted_dataclass(_cls=None, *, init=True, repr=True, eq=True, order=False
     if _cls is None:
         return wrap
     return wrap(_cls)
+
+
+def iso8601_datetime_field() -> field:
+    """Instantiate a dataclass_json field with metadata to parse an ISO8601 datetime string.
+
+    ---
+
+    datetime.fromisoformat does not support ISO datetime strings ending with Z to indicate Zulu time (+0 GMT). The
+    YouTube API uses the format **YYYY-MM-DDThh:mm:ss.sssZ** to represent the datetime objects. The simple fix is to
+    strip the trailing Z from the datetime string and set the timezone to UTC (+00:00) to conform to the expected
+    format.
+
+    :return: A dataclass field that can encode and decode ISO8601 datetime strings. The created datetimes are UTC-based.
+    """
+
+    def iso8601_datetime_decoder(dt_str: str) -> Union[datetime, None]:
+        if dt_str:
+            return datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
+        return None
+
+    return field(metadata=config(
+        encoder=datetime.isoformat,
+        decoder=iso8601_datetime_decoder
+    ))
