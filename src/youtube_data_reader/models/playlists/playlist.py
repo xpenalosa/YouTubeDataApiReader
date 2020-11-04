@@ -15,7 +15,7 @@ from youtube_data_reader.models.utils import defaulted_dataclass
 @defaulted_dataclass
 class Playlist(_IdentifiedModelBase):
     content_details: PlaylistContentDetails
-    localizations: Dict[str: LocalizationEntry]
+    localizations: Dict[str, LocalizationEntry]
     player: PlaylistPlayer
     snippet: PlaylistSnippet
     status: ItemPrivacyStatus

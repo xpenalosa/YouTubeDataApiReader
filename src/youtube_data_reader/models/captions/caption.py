@@ -8,4 +8,5 @@ from youtube_data_reader.models.utils import defaulted_dataclass
 @dataclass_json
 @defaulted_dataclass
 class Caption(_IdentifiedModelBase):
+    """Represents a YouTube caption track. A caption track is associated with exactly one YouTube video."""
     snippet: CaptionSnippet

@@ -1,0 +1,17 @@
+from dataclasses_json import dataclass_json, LetterCase
+
+from youtube_data_reader.models.common.title_wrapper import TitleFieldWrapper
+from youtube_data_reader.models.utils import defaulted_dataclass
+
+
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@defaulted_dataclass
+class ChannelSectionSnippet:
+    """Contains basic details about the channel section."""
+    channel_id: str
+    default_language: str
+    localized: TitleFieldWrapper
+    position: int
+    style: str
+    title: str
+    type: str
