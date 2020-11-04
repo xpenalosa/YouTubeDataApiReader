@@ -2,6 +2,7 @@ from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class LanguagesRequestWrapper:
+    """Request wrapper for the Languages endpoints."""
 
     @staticmethod
     def get_languages(key: str, localization_code: str = None) -> dict:

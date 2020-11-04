@@ -4,6 +4,7 @@ from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class CaptionsRequestWrapper:
+    """Request wrapper for the Captions endpoints."""
 
     @staticmethod
     def get_captions(key: str, parts: List[str], video_id: str, caption_ids: List[str] = None) -> dict:

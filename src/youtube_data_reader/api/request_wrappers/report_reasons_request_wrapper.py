@@ -4,12 +4,13 @@ from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class ReportReasonsRequestWrapper:
+    """Request wrapper for the VideoAbuseReportReasons endpoints."""
 
     @staticmethod
     def get_abuse_report_reasons(key: str, parts: List[str], localization_code: str = None) -> dict:
         """ Query the video abuse report reasons endpoint.
 
-        See https://developers.google.com/youtube/v3/docs/i18nRegions/list for complete documentation.
+        See https://developers.google.com/youtube/v3/docs/videoAbuseReportReasons/list for complete documentation.
 
         :param key: Required API key.
         :param parts: VideoAbuseReportReason resource properties that the API response will include.

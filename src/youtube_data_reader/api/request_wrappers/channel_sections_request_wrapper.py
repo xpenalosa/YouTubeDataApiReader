@@ -4,6 +4,7 @@ from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class ChannelSectionsRequestWrapper:
+    """Request wrapper for the ChannelSections endpoints."""
 
     @staticmethod
     def get_channel_sections(key: str, parts: List[str], channel_id: str, localization_code: str = None) -> dict:

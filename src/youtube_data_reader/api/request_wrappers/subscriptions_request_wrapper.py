@@ -4,6 +4,7 @@ from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class SubscriptionsRequestWrapper:
+    """Request wrapper for the Subscriptions endpoints."""
 
     @staticmethod
     def get_channel_subscriptions(key: str, parts: List[str], channel_id: str, to_channel_ids: List[str] = None,

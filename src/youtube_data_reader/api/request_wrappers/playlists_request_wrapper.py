@@ -4,6 +4,7 @@ from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class PlaylistRequestWrapper:
+    """Request wrapper for the Playlists and PlaylistItems endpoints."""
 
     @staticmethod
     def get_playlist_items(key: str, parts: List[str], playlist_id: str, max_results: int = 5, page_token: str = None,

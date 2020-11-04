@@ -4,13 +4,14 @@ from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class VideosRequestWrapper:
+    """Request wrapper for the Videos endpoints."""
 
     @staticmethod
     def get_videos(key: str, parts: List[str], video_ids: List[str], localization_code: str = None,
                    max_height: int = None, max_width: int = None) -> dict:
         """ Query the videos endpoint.
 
-        See https://developers.google.com/youtube/v3/docs/channelSections/list for complete documentation.
+        See https://developers.google.com/youtube/v3/docs/videos/list for complete documentation.
 
         :param key: Required API key.
         :param parts: ChannelSection resource properties that the API response will include.
@@ -40,7 +41,7 @@ class VideosRequestWrapper:
                            region_code: str = None, category_id: str = "0") -> dict:
         """ Query the videos endpoint for the most popular videos in a category and/or region.
 
-        See https://developers.google.com/youtube/v3/docs/channelSections/list for complete documentation.
+        See https://developers.google.com/youtube/v3/docs/videos/list for complete documentation.
 
         :param key: Required API key.
         :param parts: ChannelSection resource properties that the API response will include.

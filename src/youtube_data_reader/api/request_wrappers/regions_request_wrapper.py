@@ -2,6 +2,7 @@ from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class RegionsRequestWrapper:
+    """Request wrapper for the Regions endpoints."""
 
     @staticmethod
     def get_regions(key: str, localization_code: str = None) -> dict:

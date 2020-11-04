@@ -4,6 +4,7 @@ from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class CommentsRequestWrapper:
+    """Request wrapper for the Comments and CommentThread endpoints."""
 
     @staticmethod
     def get_comments(key: str, parts: List[str], comment_ids: List[str], text_format: str = "html") -> dict:

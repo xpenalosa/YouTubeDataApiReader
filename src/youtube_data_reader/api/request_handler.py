@@ -5,6 +5,8 @@ import requests
 
 
 class RequestHandler:
+    """HTTP request builder for the Youtube Data API."""
+
     DOMAIN = "https://www.googleapis.com/youtube/v3/"
 
     @staticmethod

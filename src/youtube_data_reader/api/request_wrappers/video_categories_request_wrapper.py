@@ -4,6 +4,7 @@ from youtube_data_reader.api.request_handler import RequestHandler
 
 
 class VideoCategoriesRequestWrapper:
+    """Request wrapper for the VideoCategories endpoints."""
 
     @staticmethod
     def get_video_categories(key: str, category_ids: List[str], localization_code: str = None) -> dict:
