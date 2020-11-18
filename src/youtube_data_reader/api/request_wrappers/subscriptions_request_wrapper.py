@@ -1,6 +1,6 @@
 from typing import List
 
-from youtube_data_reader.api.request_handler import RequestHandler
+from youtube_data_reader.api.request_handler import query_endpoint
 
 
 def get_channel_subscriptions(key: str, parts: List[str], channel_id: str, to_channel_ids: List[str] = None,
@@ -28,7 +28,7 @@ def get_channel_subscriptions(key: str, parts: List[str], channel_id: str, to_ch
         param_dict["forChannelIds"] = ",".join(to_channel_ids)
     if page_token:
         param_dict["pageToken"] = page_token
-    return RequestHandler.query_endpoint("subscriptions", param_dict)
+    return query_endpoint("subscriptions", param_dict)
 
 
 @staticmethod
@@ -57,4 +57,4 @@ def get_subscriptions(key: str, parts: List[str], subscription_ids: List[str], t
         param_dict["forChannelIds"] = ",".join(to_channel_ids)
     if page_token:
         param_dict["pageToken"] = page_token
-    return RequestHandler.query_endpoint("subscriptions", param_dict)
+    return query_endpoint("subscriptions", param_dict)

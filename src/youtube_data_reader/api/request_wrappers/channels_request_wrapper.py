@@ -1,6 +1,6 @@
 from typing import List
 
-from youtube_data_reader.api.request_handler import RequestHandler
+from youtube_data_reader.api.request_handler import query_endpoint
 
 
 def get_channels(key: str, parts: List[str], channel_ids: List[str], max_results: int = 5, page_token: str = None,
@@ -26,7 +26,7 @@ def get_channels(key: str, parts: List[str], channel_ids: List[str], max_results
         param_dict["pageToken"] = page_token
     if localization_code:
         param_dict["hl"] = localization_code
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)
 
 
 def get_user_channel(key: str, parts: List[str], username: str, max_results: int = 5, page_token: str = None,
@@ -52,4 +52,4 @@ def get_user_channel(key: str, parts: List[str], username: str, max_results: int
         param_dict["pageToken"] = page_token
     if localization_code:
         param_dict["hl"] = localization_code
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)

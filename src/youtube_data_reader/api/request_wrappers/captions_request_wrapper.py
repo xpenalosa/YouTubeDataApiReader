@@ -1,6 +1,6 @@
 from typing import List
 
-from youtube_data_reader.api.request_handler import RequestHandler
+from youtube_data_reader.api.request_handler import query_endpoint
 
 
 def get_captions(key: str, parts: List[str], video_id: str, caption_ids: List[str] = None) -> dict:
@@ -20,4 +20,4 @@ def get_captions(key: str, parts: List[str], video_id: str, caption_ids: List[st
         "videoId": video_id}
     if caption_ids:
         param_dict["id"] = ",".join(caption_ids)
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)

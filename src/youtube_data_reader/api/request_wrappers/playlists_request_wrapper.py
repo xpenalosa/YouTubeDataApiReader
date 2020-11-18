@@ -1,6 +1,6 @@
 from typing import List
 
-from youtube_data_reader.api.request_handler import RequestHandler
+from youtube_data_reader.api.request_handler import query_endpoint
 
 
 def get_playlist_items(key: str, parts: List[str], playlist_id: str, max_results: int = 5, page_token: str = None,
@@ -26,7 +26,7 @@ def get_playlist_items(key: str, parts: List[str], playlist_id: str, max_results
         param_dict["pageToken"] = page_token
     if video_id:
         param_dict["videoId"] = video_id
-    return RequestHandler.query_endpoint("playlistItems", param_dict)
+    return query_endpoint("playlistItems", param_dict)
 
 
 def get_playlist_items_by_id(key: str, parts: List[str], playlist_item_ids: List[str], max_results: int = 5,
@@ -52,7 +52,7 @@ def get_playlist_items_by_id(key: str, parts: List[str], playlist_item_ids: List
         param_dict["pageToken"] = page_token
     if video_id:
         param_dict["videoId"] = video_id
-    return RequestHandler.query_endpoint("playlistItems", param_dict)
+    return query_endpoint("playlistItems", param_dict)
 
 
 def get_channel_playlists(key: str, parts: List[str], channel_id: str, max_results: int = 5, page_token: str = None,
@@ -78,7 +78,7 @@ def get_channel_playlists(key: str, parts: List[str], channel_id: str, max_resul
         param_dict["pageToken"] = page_token
     if localization_code:
         param_dict["hl"] = localization_code
-    return RequestHandler.query_endpoint("playlists", param_dict)
+    return query_endpoint("playlists", param_dict)
 
 
 def get_playlists(key: str, parts: List[str], playlist_ids: List[str], max_results: int = 5, page_token: str = None,
@@ -104,4 +104,4 @@ def get_playlists(key: str, parts: List[str], playlist_ids: List[str], max_resul
         param_dict["pageToken"] = page_token
     if localization_code:
         param_dict["hl"] = localization_code
-    return RequestHandler.query_endpoint("playlists", param_dict)
+    return query_endpoint("playlists", param_dict)

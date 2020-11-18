@@ -1,6 +1,6 @@
 from typing import List
 
-from youtube_data_reader.api.request_handler import RequestHandler
+from youtube_data_reader.api.request_handler import query_endpoint
 
 
 def get_video_categories(key: str, category_ids: List[str], localization_code: str = None) -> dict:
@@ -19,7 +19,7 @@ def get_video_categories(key: str, category_ids: List[str], localization_code: s
         "id": ",".join(category_ids)}
     if localization_code:
         param_dict["hl"] = localization_code
-    return RequestHandler.query_endpoint("videoCategories", param_dict)
+    return query_endpoint("videoCategories", param_dict)
 
 
 def get_video_categories_in_region(key: str, region_code: str, localization_code: str = None) -> dict:
@@ -38,4 +38,4 @@ def get_video_categories_in_region(key: str, region_code: str, localization_code
         "regionCode": region_code}
     if localization_code:
         param_dict["hl"] = localization_code
-    return RequestHandler.query_endpoint("videoCategories", param_dict)
+    return query_endpoint("videoCategories", param_dict)

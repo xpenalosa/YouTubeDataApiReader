@@ -1,6 +1,6 @@
 from typing import List
 
-from youtube_data_reader.api.request_handler import RequestHandler
+from youtube_data_reader.api.request_handler import query_endpoint
 
 
 def get_videos(key: str, parts: List[str], video_ids: List[str], localization_code: str = None,
@@ -29,7 +29,7 @@ def get_videos(key: str, parts: List[str], video_ids: List[str], localization_co
     if max_width:
         # Value 0 is invalid so truthy value check is enough
         param_dict["maxWidth"] = max(72, min(8192, max_width))
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)
 
 
 def get_popular_videos(key: str, parts: List[str], localization_code: str = None, max_results: int = 5,
@@ -69,4 +69,4 @@ def get_popular_videos(key: str, parts: List[str], localization_code: str = None
     if region_code:
         param_dict["regionCode"] = region_code
 
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)

@@ -1,6 +1,6 @@
 from typing import List
 
-from youtube_data_reader.api.request_handler import RequestHandler
+from youtube_data_reader.api.request_handler import query_endpoint
 
 
 def get_comments(key: str, parts: List[str], comment_ids: List[str], text_format: str = "html") -> dict:
@@ -19,7 +19,7 @@ def get_comments(key: str, parts: List[str], comment_ids: List[str], text_format
         "part": ",".join(parts),
         "id": ",".join(comment_ids),
         "textFormat": text_format}
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)
 
 
 def get_comment_responses(key: str, parts: List[str], comment_id: str, max_results: int = 20,
@@ -44,7 +44,7 @@ def get_comment_responses(key: str, parts: List[str], comment_id: str, max_resul
         "textFormat": text_format}
     if page_token:
         param_dict["pageToken"] = page_token
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)
 
 
 def get_comment_threads(key: str, parts: List[str], thread_ids: List[str], max_results: int = 20,
@@ -75,7 +75,7 @@ def get_comment_threads(key: str, parts: List[str], thread_ids: List[str], max_r
         param_dict["pageToken"] = page_token
     if search_terms:
         param_dict["searchTerms"] = search_terms
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)
 
 
 def get_comment_threads_in_video(key: str, parts: List[str], video_id: str, max_results: int = 20,
@@ -106,7 +106,7 @@ def get_comment_threads_in_video(key: str, parts: List[str], video_id: str, max_
         param_dict["pageToken"] = page_token
     if search_terms:
         param_dict["searchTerms"] = search_terms
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)
 
 
 def get_comment_threads_by_channel(key: str, parts: List[str], channel_id: str = None, max_results: int = 20,
@@ -137,7 +137,7 @@ def get_comment_threads_by_channel(key: str, parts: List[str], channel_id: str =
         param_dict["pageToken"] = page_token
     if search_terms:
         param_dict["searchTerms"] = search_terms
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)
 
 
 def get_comment_threads_related_to_channel(key: str, parts: List[str], channel_id: str = None,
@@ -168,4 +168,4 @@ def get_comment_threads_related_to_channel(key: str, parts: List[str], channel_i
         param_dict["pageToken"] = page_token
     if search_terms:
         param_dict["searchTerms"] = search_terms
-    return RequestHandler.query_endpoint("channels", param_dict)
+    return query_endpoint("channels", param_dict)

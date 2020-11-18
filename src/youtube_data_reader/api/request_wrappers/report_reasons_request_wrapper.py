@@ -1,6 +1,6 @@
 from typing import List
 
-from youtube_data_reader.api.request_handler import RequestHandler
+from youtube_data_reader.api.request_handler import query_endpoint
 
 
 def get_abuse_report_reasons(key: str, parts: List[str], localization_code: str = None) -> dict:
@@ -19,4 +19,4 @@ def get_abuse_report_reasons(key: str, parts: List[str], localization_code: str 
     }
     if localization_code:
         param_dict["hl"] = localization_code
-    return RequestHandler.query_endpoint("videoAbuseReportReasons", param_dict)
+    return query_endpoint("videoAbuseReportReasons", param_dict)

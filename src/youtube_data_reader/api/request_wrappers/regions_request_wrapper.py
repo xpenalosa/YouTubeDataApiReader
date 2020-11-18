@@ -1,4 +1,4 @@
-from youtube_data_reader.api.request_handler import RequestHandler
+from youtube_data_reader.api.request_handler import query_endpoint
 
 
 def get_regions(key: str, localization_code: str = None) -> dict:
@@ -16,4 +16,4 @@ def get_regions(key: str, localization_code: str = None) -> dict:
     }
     if localization_code:
         param_dict["hl"] = localization_code
-    return RequestHandler.query_endpoint("i18nRegions", param_dict)
+    return query_endpoint("i18nRegions", param_dict)
