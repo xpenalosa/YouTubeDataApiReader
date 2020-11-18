@@ -16,17 +16,20 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.9
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pylint
+
       - name: Analysing the code with pylint
-        run: pylint src/youtube_data_reader --exit-zero > .github/workflows/pylint.out
-      - name: Extracting pylint results
-        run: grep "." .github/workflows/pylint.out | tail -1 > .github/workflows/pylint.score
+        run: |
+          pylint src/youtube_data_reader --exit-zero | tee pylint.txt
+          echo "::set-env name=pylint_artifact_name::Pylint_$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint.txt)"
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: pylint-score
-          path: .github/workflows/pylint.score
+          name: ${{ env.pylint_artifact_name }}
+          path: pylint.txt
