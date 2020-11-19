@@ -4,7 +4,7 @@ The functions in this module are required in order to implement missing or limit
 dataclasses_json module.
 """
 
-from dataclasses import dataclass, field as dc_field, field
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Union
 
@@ -17,7 +17,7 @@ def defaulted_dataclass(_cls=None, *, init=True, repr=True, eq=True, order=False
     This is required to populate the API responses into the dataclass models without `dataclasses_json` throwing
     warnings on uninitialized fields. As of v0.5.2, there is no option to silence these warnings other than adding the
     Optional typing annotation to each and every field and initializing it. This does not contribute to the simplicity
-    of a codebase and `dataclasses_json` has not been updated for 3 months, so plans to fix this are unclear.
+    of a codebase and `dataclasses_json` has not been updated since July 28th 2020, so plans to fix this are unclear.
     https://github.com/lidatong/dataclasses-json/issues/217.
 
     ----- dataclasses.dataclass documentation below -----
@@ -32,12 +32,12 @@ def defaulted_dataclass(_cls=None, *, init=True, repr=True, eq=True, order=False
     """
 
     def wrap(cls):
-        for field, value in cls.__annotations__.items():
+        for attr_name, attr_type in cls.__annotations__.items():
             # Add NoneType to acceptable values
-            cls.__annotations__[field] = Union[value, None]
-            if not hasattr(cls, field):
-                # No default value for the field, set None as default
-                setattr(cls, field, dc_field(default=None))
+            cls.__annotations__[attr_name] = Union[attr_type, None]
+            if not hasattr(cls, attr_name):
+                # No default value for the attribute, set None as default
+                setattr(cls, attr_name, field(default=None))
         # Return dataclass-wrapped class
         return dataclass(cls, init=init, repr=repr, eq=eq, order=order, unsafe_hash=unsafe_hash, frozen=frozen)
 
