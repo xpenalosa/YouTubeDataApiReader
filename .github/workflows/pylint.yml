@@ -25,7 +25,7 @@ jobs:
 
       - name: Analysing the code with pylint
         run: |
-          pylint src/youtube_data_reader --exit-zero | tee pylint.txt
+          pylint youtube_data_reader --exit-zero | tee pylint.txt
           echo "pylint_artifact_name=Pylint_$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint.txt)" >> $GITHUB_ENV
 
       - name: Upload artifacts

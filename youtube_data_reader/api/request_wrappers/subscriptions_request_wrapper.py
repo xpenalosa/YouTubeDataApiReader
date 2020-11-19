@@ -31,7 +31,6 @@ def get_channel_subscriptions(key: str, parts: List[str], channel_id: str, to_ch
     return query_endpoint("subscriptions", param_dict)
 
 
-@staticmethod
 def get_subscriptions(key: str, parts: List[str], subscription_ids: List[str], to_channel_ids: List[str] = None,
                       max_results: int = 5, order: str = "relevance", page_token: str = None) -> dict:
     """ Query the subscriptions endpoint.
