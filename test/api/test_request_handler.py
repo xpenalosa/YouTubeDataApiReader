@@ -3,8 +3,6 @@ import json
 import pytest
 from requests.exceptions import HTTPError
 
-# noinspection PyUnresolvedReferences
-from test import api_key
 from youtube_data_reader.api.request_handler import query_endpoint
 
 
@@ -17,7 +15,6 @@ def test_extract_error():
     assert exceptions[0]["reason"] == "forbidden"
 
 
-@pytest.mark.skipif("not api_key")
 def test_query_endpoint(api_key):
     response_body = query_endpoint("i18nLanguages", {"key": api_key})
     assert response_body is not None
