@@ -2,8 +2,9 @@ name: Pylint
 
 on:
   push:
-    paths-ignore:
-      - 'docs/**'
+    paths:
+      - 'youtube_data_reader/**'
+      - '.github/workflows/pylint.yml'
 
 jobs:
   lint:
