@@ -6,5 +6,5 @@ Coding this project in my free time. It is still in a very early stage and not r
 
 ---
 
-Using [GitHub's Projects](https://github.com/users/xpenalosa/projects/1) to track progress and to-do items.
+Using [GitHub's Projects](https://github.com/xpenalosa/YouTubeDataApiReader/projects/1) to track progress and to-do items.
  
