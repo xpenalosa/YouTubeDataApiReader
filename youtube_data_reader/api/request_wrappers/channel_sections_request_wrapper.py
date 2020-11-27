@@ -17,7 +17,7 @@ def get_channel_sections(key: str, parts: List[str], channel_id: str, localizati
     param_dict = {
         "key": key,
         "part": ",".join(parts),
-        "channelId": ",".join(channel_id)}
+        "channelId": channel_id}
     if localization_code:
         param_dict["hl"] = localization_code
     return query_endpoint("channelSections", param_dict)
